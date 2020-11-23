@@ -4,7 +4,7 @@ package ua.edu.ucu.collections.immutable;
 public class ImmutableArrayList implements ImmutableList {
     private final Object[] items;
     private final int length;
-    public ImmutableArrayList(Object[] array){
+    public ImmutableArrayList(Object[] array) {
         this.items = array;
         this.length = array.length;
     }
@@ -27,11 +27,11 @@ public class ImmutableArrayList implements ImmutableList {
         if (index != this.length) {
             this.checkIndex(index);
         }
-        Object[] new_array = new Object[this.length + c.length];
-        System.arraycopy(this.items, 0, new_array, 0, index);
-        System.arraycopy(c, 0, new_array, index, c.length);
-        System.arraycopy(this.items, index, new_array, index + c.length, this.length - index);
-        return new ImmutableArrayList(new_array);
+        Object[] newArray = new Object[this.length + c.length];
+        System.arraycopy(this.items, 0, newArray, 0, index);
+        System.arraycopy(c, 0, newArray, index, c.length);
+        System.arraycopy(this.items, index, newArray, index + c.length, this.length - index);
+        return new ImmutableArrayList(newArray);
     }
 
     public Object get(int index) throws IndexOutOfBoundsException{
@@ -41,23 +41,23 @@ public class ImmutableArrayList implements ImmutableList {
 
     public ImmutableArrayList remove(int index) throws IndexOutOfBoundsException{
         this.checkIndex(index);
-        Object[] new_array = new Object[this.length - 1];
-        System.arraycopy(this.items, 0, new_array, 0, index);
-        System.arraycopy(this.items, index + 1, new_array, index, this.length - index - 1);
-        return new ImmutableArrayList(new_array);
+        Object[] newArray = new Object[this.length - 1];
+        System.arraycopy(this.items, 0, newArray, 0, index);
+        System.arraycopy(this.items, index + 1, newArray, index, this.length - index - 1);
+        return new ImmutableArrayList(newArray);
     }
 
     public ImmutableArrayList set(int index, Object e) throws IndexOutOfBoundsException{
         this.checkIndex(index);
-        Object[] new_array = new Object[this.length];
-        System.arraycopy(this.items, 0, new_array, 0, this.length);
-        new_array[index] = e;
-        return new ImmutableArrayList(new_array);
+        Object[] newArray = new Object[this.length];
+        System.arraycopy(this.items, 0, newArray, 0, this.length);
+        newArray[index] = e;
+        return new ImmutableArrayList(newArray);
     }
 
     public int indexOf(Object e) {
-        for (int index = 0; index < this.length; index++){
-            if (e == this.items[index]){
+        for (int index = 0; index < this.length; index++) {
+            if (e == this.items[index]) {
                 return index;
             }
         }
@@ -69,11 +69,11 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     public ImmutableArrayList clear(Object e) {
-        Object[] new_array = new Object[this.length];
+        Object[] newArray = new Object[this.length];
         for (int i = 0; i < this.length; i++) {
-            new_array[i] = e;
+            newArray[i] = e;
         }
-        return new ImmutableArrayList(new_array);
+        return new ImmutableArrayList(newArray);
     }
 
     public boolean isEmpty() {
@@ -81,16 +81,16 @@ public class ImmutableArrayList implements ImmutableList {
     }
 
     public Object[] toArray() {
-        Object[] new_array = new Object[this.length];
-        System.arraycopy(this.items, 0, new_array, 0, this.length);
-        return new_array;
+        Object[] newArray = new Object[this.length];
+        System.arraycopy(this.items, 0, newArray, 0, this.length);
+        return newArray;
     }
 
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int index = 0; index < this.length; index++){
+        for (int index = 0; index < this.length; index++) {
             result.append(this.items[index].toString());
-            if (index != this.length - 1){
+            if (index != this.length - 1) {
                 result.append(",");
             }
 
