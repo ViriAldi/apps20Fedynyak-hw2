@@ -4,26 +4,26 @@ import ua.edu.ucu.collections.immutable.ImmutableLinkedList;
 
 public class Queue {
     ImmutableLinkedList items;
-    public Queue(Object[] array){
-        this.items = new ImmutableLinkedList(array);
+    public Queue(){
+        this.items = new ImmutableLinkedList(new Object[]{});
     }
 
-    Object peek(){
-        return this.items.getFirst();
+    Object peek() {
+        return this.items.getLast();
     }
 
-    Object dequeue(){
+    Object dequeue() throws IndexOutOfBoundsException {
         Object first = this.peek();
-        this.items = this.items.removeFirst();
+        this.items = this.items.removeLast();
         return first;
     }
 
-    void enqueue(Object e){
-        this.items = this.items.addLast(e);
+    void enqueue(Object e) {
+        this.items = this.items.addFirst(e);
     }
 
     @Override
-    public String toString(){
-        return this.items.toString();
+    public String toString() {
+        return "TAIL " + this.items.toString() + " HEAD";
     }
 }

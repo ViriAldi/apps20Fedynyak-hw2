@@ -87,4 +87,80 @@ public class ImmutableLinkedListTest {
         ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{"jabaaa"});
         assertFalse(arr.isEmpty());
     }
+
+    @Test
+    public void testClear() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{"jabaa", "jabba", 1, 0.1});
+        assertEquals(arr.clear(0).toString(), "0,0,0,0");
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetWrongIndex() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{1, 2, 3, "jaba"});
+        arr.get(10);
+    }
+
+    @Test
+    public void testGetFirst() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{1, 2, 3, "jaba"});
+        Object item = arr.getFirst();
+        assertEquals(item, 1);
+    }
+
+    @Test
+    public void testGetLast() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{1, 2, 3, "jaba"});
+        Object item = arr.getLast();
+        assertEquals(item, "jaba");
+    }
+
+    @Test
+    public void testAddFirst() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{1, 2, 3, "jaba"});
+        ImmutableLinkedList arr1 = arr.addFirst("DAI JABU");
+        assertEquals(arr1.toString(), "DAI JABU,1,2,3,jaba");
+    }
+
+    @Test
+    public void testAddLast() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{1, 2, 3, "jaba"});
+        ImmutableLinkedList arr1 = arr.addLast("DAI JABU");
+        assertEquals(arr1.toString(), "1,2,3,jaba,DAI JABU");
+    }
+
+    @Test
+    public void testRemoveFirst() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{1, 2, 3, "jaba"});
+        ImmutableLinkedList arr1 = arr.removeFirst();
+        assertEquals(arr1.toString(), "2,3,jaba");
+    }
+
+    @Test
+    public void testRemoveLast() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{1, 2, 3, "jaba"});
+        ImmutableLinkedList arr1 = arr.removeLast();
+        assertEquals(arr1.toString(), "1,2,3");
+    }
+
+    @Test
+    public void testRemoveFirstLastOneElementList() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{1});
+        ImmutableLinkedList arr1 = arr.removeLast();
+        assertEquals(arr1.toString(), "");
+        ImmutableLinkedList arr2 = arr.removeFirst();
+        assertEquals(arr2.toString(), "");
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRemoveFirstFromEmptyList() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{});
+        arr.removeFirst();
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRemoveLastFromEmptyList() {
+        ImmutableLinkedList arr = new ImmutableLinkedList(new Object[]{});
+        arr.removeLast();
+    }
+
 }

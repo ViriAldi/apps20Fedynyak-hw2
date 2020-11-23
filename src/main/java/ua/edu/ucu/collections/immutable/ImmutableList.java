@@ -21,7 +21,7 @@ public interface ImmutableList {
 
     int size(); //розмір колекції
 
-    ImmutableList clear(); //очищує вміст колекції
+    ImmutableList clear(Object e); //очищує вміст колекції
 
     boolean isEmpty(); //якщо у колеції нема елементів то повертає true
 

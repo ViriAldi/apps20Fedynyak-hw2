@@ -13,7 +13,7 @@ public class ImmutableLinkedList implements ImmutableList{
     }
     private Node head;
     private Node tail;
-    private final int length;
+    private int length;
 
     public ImmutableLinkedList(Object[] array){
         this.length = array.length;
@@ -127,8 +127,11 @@ public class ImmutableLinkedList implements ImmutableList{
         return this.length == 0;
     }
 
-    public ImmutableLinkedList clear(){
-        Object[] array = this.toArray();
+    public ImmutableLinkedList clear(Object e){
+        Object[] array = new Object[this.length];
+        for (int i = 0; i < this.length; i++) {
+            array[i] = e;
+        }
         return new ImmutableLinkedList(array);
     }
 
@@ -157,20 +160,28 @@ public class ImmutableLinkedList implements ImmutableList{
     }
 
     public ImmutableLinkedList addFirst(Object e){
+        if (this.length == 0){
+            return new ImmutableLinkedList(new Object[]{e});
+        }
         ImmutableLinkedList cpy = this.copy();
         Node new_node = new Node(e);
         new_node.next = cpy.head;
         cpy.head.prev = new_node;
         cpy.head = new_node;
+        cpy.length++;
         return cpy;
     }
 
     public ImmutableLinkedList addLast(Object e){
+        if (this.length == 0){
+            return new ImmutableLinkedList(new Object[]{e});
+        }
         ImmutableLinkedList cpy = this.copy();
         Node new_node = new Node(e);
         new_node.prev = cpy.tail;
         cpy.tail.next = new_node;
         cpy.tail = new_node;
+        cpy.length++;
         return cpy;
     }
 
@@ -193,6 +204,7 @@ public class ImmutableLinkedList implements ImmutableList{
         ImmutableLinkedList cpy = this.copy();
         cpy.head = cpy.head.next;
         cpy.head.prev = null;
+        cpy.length--;
         return cpy;
     }
 
@@ -207,6 +219,7 @@ public class ImmutableLinkedList implements ImmutableList{
         ImmutableLinkedList cpy = this.copy();
         cpy.tail = cpy.tail.prev;
         cpy.tail.next = null;
+        cpy.length--;
         return cpy;
     }
 

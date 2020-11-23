@@ -4,21 +4,26 @@ import ua.edu.ucu.collections.immutable.ImmutableLinkedList;
 
 public class Stack {
     ImmutableLinkedList items;
-    public Stack(Object[] array){
-        this.items = new ImmutableLinkedList(array);
+    public Stack() {
+        this.items = new ImmutableLinkedList(new Object[]{});
     }
 
     Object peek(){
-        return this.items.getFirst();
+        return this.items.getLast();
     }
 
-    Object pop(){
+    Object pop () throws IndexOutOfBoundsException {
         Object first = this.peek();
-        this.items = this.items.removeFirst();
+        this.items = this.items.removeLast();
         return first;
     }
 
-    void push(Object e){
-        this.items = this.items.addFirst(e);
+    void push(Object e) {
+        this.items = this.items.addLast(e);
+    }
+
+    @Override
+    public String toString(){
+        return "BOTTOM " + this.items.toString() + " TOP";
     }
 }

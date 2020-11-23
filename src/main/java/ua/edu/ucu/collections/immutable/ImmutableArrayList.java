@@ -9,23 +9,24 @@ public class ImmutableArrayList implements ImmutableList {
         this.length = array.length;
     }
 
-    public ImmutableList add(Object e) {
+    public ImmutableArrayList add(Object e) {
         Object[] wrapper = {e};
         return this.addAll(wrapper);
     }
 
-    public ImmutableList addAll(Object[] c) {
+    public ImmutableArrayList addAll(Object[] c) {
         return this.addAll(this.length, c);
     }
 
-    public ImmutableList add(int index, Object e) throws IndexOutOfBoundsException{
-        this.checkIndex(index);
+    public ImmutableArrayList add(int index, Object e) throws IndexOutOfBoundsException{
         Object[] wrapper = {e};
-        return this.addAll(wrapper);
+        return this.addAll(index, wrapper);
     }
 
-    public ImmutableList addAll(int index, Object[] c) throws IndexOutOfBoundsException{
-        this.checkIndex(index);
+    public ImmutableArrayList addAll(int index, Object[] c) throws IndexOutOfBoundsException{
+        if (index != this.length) {
+            this.checkIndex(index);
+        }
         Object[] new_array = new Object[this.length + c.length];
         System.arraycopy(this.items, 0, new_array, 0, index);
         System.arraycopy(c, 0, new_array, index, c.length);
@@ -38,7 +39,7 @@ public class ImmutableArrayList implements ImmutableList {
         return this.items[index];
     }
 
-    public ImmutableList remove(int index) throws IndexOutOfBoundsException{
+    public ImmutableArrayList remove(int index) throws IndexOutOfBoundsException{
         this.checkIndex(index);
         Object[] new_array = new Object[this.length - 1];
         System.arraycopy(this.items, 0, new_array, 0, index);
@@ -46,7 +47,7 @@ public class ImmutableArrayList implements ImmutableList {
         return new ImmutableArrayList(new_array);
     }
 
-    public ImmutableList set(int index, Object e) throws IndexOutOfBoundsException{
+    public ImmutableArrayList set(int index, Object e) throws IndexOutOfBoundsException{
         this.checkIndex(index);
         Object[] new_array = new Object[this.length];
         System.arraycopy(this.items, 0, new_array, 0, this.length);
@@ -67,8 +68,11 @@ public class ImmutableArrayList implements ImmutableList {
         return this.length;
     }
 
-    public ImmutableList clear() {
+    public ImmutableArrayList clear(Object e) {
         Object[] new_array = new Object[this.length];
+        for (int i = 0; i < this.length; i++) {
+            new_array[i] = e;
+        }
         return new ImmutableArrayList(new_array);
     }
 
