@@ -8,7 +8,7 @@ public class Stack {
         this.items = new ImmutableLinkedList(new Object[]{});
     }
 
-    Object peek(){
+    Object peek() {
         return this.items.getLast();
     }
 
@@ -23,7 +23,7 @@ public class Stack {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "BOTTOM " + this.items.toString() + " TOP";
     }
 }
