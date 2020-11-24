@@ -18,36 +18,42 @@ public class ImmutableArrayList implements ImmutableList {
         return this.addAll(this.length, c);
     }
 
-    public ImmutableArrayList add(int index, Object e) throws IndexOutOfBoundsException{
+    public ImmutableArrayList add(int index, Object e)
+            throws IndexOutOfBoundsException {
         Object[] wrapper = {e};
         return this.addAll(index, wrapper);
     }
 
-    public ImmutableArrayList addAll(int index, Object[] c) throws IndexOutOfBoundsException{
+    public ImmutableArrayList addAll(int index, Object[] c)
+            throws IndexOutOfBoundsException {
         if (index != this.length) {
             this.checkIndex(index);
         }
         Object[] newArray = new Object[this.length + c.length];
         System.arraycopy(this.items, 0, newArray, 0, index);
         System.arraycopy(c, 0, newArray, index, c.length);
-        System.arraycopy(this.items, index, newArray, index + c.length, this.length - index);
+        System.arraycopy(this.items, index, newArray,
+                index + c.length, this.length - index);
         return new ImmutableArrayList(newArray);
     }
 
-    public Object get(int index) throws IndexOutOfBoundsException{
+    public Object get(int index) throws IndexOutOfBoundsException {
         this.checkIndex(index);
         return this.items[index];
     }
 
-    public ImmutableArrayList remove(int index) throws IndexOutOfBoundsException{
+    public ImmutableArrayList remove(int index)
+            throws IndexOutOfBoundsException {
         this.checkIndex(index);
         Object[] newArray = new Object[this.length - 1];
         System.arraycopy(this.items, 0, newArray, 0, index);
-        System.arraycopy(this.items, index + 1, newArray, index, this.length - index - 1);
+        System.arraycopy(this.items, index + 1, newArray, index,
+                this.length - index - 1);
         return new ImmutableArrayList(newArray);
     }
 
-    public ImmutableArrayList set(int index, Object e) throws IndexOutOfBoundsException{
+    public ImmutableArrayList set(int index, Object e)
+            throws IndexOutOfBoundsException {
         this.checkIndex(index);
         Object[] newArray = new Object[this.length];
         System.arraycopy(this.items, 0, newArray, 0, this.length);

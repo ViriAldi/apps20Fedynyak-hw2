@@ -1,6 +1,6 @@
 package ua.edu.ucu.collections.immutable;
 
-public class ImmutableLinkedList implements ImmutableList{
+public class ImmutableLinkedList implements ImmutableList {
     static class Node {
         Object item;
         Node next;
@@ -61,13 +61,15 @@ public class ImmutableLinkedList implements ImmutableList{
         return this.addAll(this.length, c);
     }
 
-    public ImmutableLinkedList add(int index, Object e) throws IndexOutOfBoundsException{
+    public ImmutableLinkedList add(int index, Object e)
+            throws IndexOutOfBoundsException {
         Object[] wrapper = {e};
         return this.addAll(index, wrapper);
     }
 
 
-    public ImmutableLinkedList addAll(int index, Object[] c) throws IndexOutOfBoundsException{
+    public ImmutableLinkedList addAll(int index, Object[] c)
+            throws IndexOutOfBoundsException {
         if (index != this.length) {
             this.checkIndex(index);
         }
@@ -75,7 +77,8 @@ public class ImmutableLinkedList implements ImmutableList{
         Object[] ourArray = this.toArray();
         System.arraycopy(ourArray, 0, newArray, 0, index);
         System.arraycopy(c, 0, newArray, index, c.length);
-        System.arraycopy(ourArray, index, newArray, index + c.length, this.length - index);
+        System.arraycopy(ourArray, index, newArray, index + c.length,
+                this.length - index);
         return new ImmutableLinkedList(newArray);
     }
 
@@ -90,16 +93,19 @@ public class ImmutableLinkedList implements ImmutableList{
         return current.item;
     }
 
-    public ImmutableLinkedList remove(int index) throws IndexOutOfBoundsException {
+    public ImmutableLinkedList remove(int index)
+            throws IndexOutOfBoundsException {
         this.checkIndex(index);
         Object[] array = this.toArray();
         Object[] newArray = new Object[this.length - 1];
         System.arraycopy(array, 0, newArray, 0, index);
-        System.arraycopy(array, index + 1, newArray, index, this.length - index - 1);
+        System.arraycopy(array, index + 1, newArray, index,
+                this.length - index - 1);
         return new ImmutableLinkedList(newArray);
     }
 
-    public ImmutableLinkedList set(int index, Object e) throws IndexOutOfBoundsException {
+    public ImmutableLinkedList set(int index, Object e)
+            throws IndexOutOfBoundsException {
         this.checkIndex(index);
         Object[] array = this.toArray();
         array[index] = e;
@@ -193,7 +199,7 @@ public class ImmutableLinkedList implements ImmutableList{
         return this.tail.item;
     }
 
-    public ImmutableLinkedList removeFirst() throws IndexOutOfBoundsException{
+    public ImmutableLinkedList removeFirst() throws IndexOutOfBoundsException {
         if (this.isEmpty()) {
             throw new IndexOutOfBoundsException();
         }
@@ -208,7 +214,7 @@ public class ImmutableLinkedList implements ImmutableList{
         return cpy;
     }
 
-    public ImmutableLinkedList removeLast() throws IndexOutOfBoundsException{
+    public ImmutableLinkedList removeLast() throws IndexOutOfBoundsException {
         if (this.isEmpty()) {
             throw new IndexOutOfBoundsException();
         }
