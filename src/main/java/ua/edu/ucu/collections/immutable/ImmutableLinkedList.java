@@ -2,7 +2,7 @@ package ua.edu.ucu.collections.immutable;
 
 public class ImmutableLinkedList implements ImmutableList {
     static class Node {
-        Object item;
+        private final Object item;
         private Node next;
         private Node prev;
         public Node(Object item) {
