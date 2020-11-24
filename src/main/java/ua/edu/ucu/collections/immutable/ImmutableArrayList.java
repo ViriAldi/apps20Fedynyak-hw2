@@ -5,9 +5,9 @@ public class ImmutableArrayList implements ImmutableList {
     private final Object[] items;
     private final int length;
     public ImmutableArrayList(Object[] array) {
-        Object[] items = new Object[array.length];
-        System.arraycopy(array, 0, items, 0, array.length);
-        this.items = items;
+        Object[] arr_cpy = new Object[array.length];
+        System.arraycopy(array, 0, arr_cpy, 0, array.length);
+        this.items = arr_cpy;
         this.length = array.length;
     }
 
